@@ -1,0 +1,14 @@
+name: macOS Build
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build for Apple Silicon
+        run: make CFLAGS="-arch arm64"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cdecrypt-macos-arm64
+          path: cdecrypt
